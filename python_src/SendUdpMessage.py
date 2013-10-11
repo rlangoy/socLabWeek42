@@ -12,12 +12,17 @@ counter=0;
 sock = socket.socket(socket.AF_INET,     # Internet protocol
                      socket.SOCK_DGRAM)  # User Datagram (UDP)
 while True:
-    #Make string to send as UDP
-    counter+=1
-    Message= "My UDP Message nr: " + str(counter);
+    #Make a 3 bit counter
+    counter=(counter+1)%8
+    aBinCnt=bin(counter)[2:].zfill(3)
 
-    # Send the message
-    sock.sendto(Message, (UDP_IP, UDP_PORT)) 
+    #Make a csv string 
+    Message= "$SW,"+aBinCnt[2]+","+aBinCnt[1]+","+aBinCnt[0]
+
+    # Send the csv string as a UDP message
+    sock.sendto(Message, (UDP_IP, UDP_PORT))
+
+    print "Sendt Message: "+Message
 
     #Wait a second before retansmitting data
     time.sleep(1) 
