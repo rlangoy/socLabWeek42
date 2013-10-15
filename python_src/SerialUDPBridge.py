@@ -20,7 +20,7 @@ print "UDP target port:", UDP_PORT
 
 sock = socket.socket(socket.AF_INET,     # Internet protocol
                      socket.SOCK_DGRAM)  # User Datagram (UDP)
-sock.bind((UDP_IP, UDP_PORT))            # Listen on this address
+sock.bind("0.0.0.0", UDP_PORT)           # Listen on all adapters
 
 SerialIOArduino = serial.Serial(port,9600) # setup the serial port and baudrate
 SerialIOArduino.flushInput() # Remove old input's
